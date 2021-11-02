@@ -5,22 +5,19 @@ const TodoListsSchema = new Schema({
 
   title: {
     type: String,
-    required: true
+    required: true,
   },
-  // content: {
-  //   type: [Object],
-  //   required: true
-  // },
-  // lastModifiedAt: {
-  //   type: Date,
-  //   default: Date.now,
-  // },
-  // userId: {
-  //   type: mongoose.ObjectId,
-  //   required: true,
-  // },
-  text: {
+  contents: {
     type: String,
+  },
+  lastModifiedAt: {
+    type: Date,
+    default: Date.now,
+  },
+  userId: {
+    type: mongoose.ObjectId,
+    required: true,
+    ref: 'User',
   },
 });
 

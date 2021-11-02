@@ -31,11 +31,11 @@ router.get('/:id', async function (req, res, next) {
 //   lists.push(req.body);
 //   res.json(lists);
 // });
-//
-// router.post('/api/lists/:id', function(req, res, next) {
-//
-// });
-//
+
+router.post('/api/lists/:id', function(req, res, next) {
+
+});
+
 // // -- UPDATE ROUTES -- //
 //
 //
