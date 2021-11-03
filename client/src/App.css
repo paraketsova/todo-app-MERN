@@ -12,6 +12,7 @@ body {
 h1 {
   text-align: center;
   color: orangered;
+  font-weight: bolder;
 }
 
 table {
@@ -27,6 +28,10 @@ table {
 }
 .col2 {
   width: 30rem;
+}
+
+.col2 {
+  width: 20rem;
 }
 
 th {
