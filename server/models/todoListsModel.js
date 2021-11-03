@@ -19,6 +19,10 @@ const TodoListsSchema = new Schema({
     required: true,
     ref: 'User',
   },
+  completed: {
+    type: Boolean,
+    default: false,
+  }
 });
 
 const TodoLists = mongoose.model('todolists', TodoListsSchema);
