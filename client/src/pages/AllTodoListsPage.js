@@ -1,32 +1,35 @@
 import React, {useEffect, useState} from 'react';
-//
+import List from '../components/List';
+
 export default function AllTodoListsPage() {
-//   const [data, setData] = useState(null);
-//
-//   const fetchData = () => {
-//     const url = '/api/todo/lists';
-//     fetch(url)
-//       .then(res => res.json())
-//       .then(data => setData(data))
-//   };
-//
-//   useEffect(() => {
-//     fetchData()
-//   }, [])
+  const [data, setData] = useState(null);
+
+  const fetchData = () => {
+    const url = 'http://localhost:3000/api/todo/lists';
+    fetch(url)
+      .then(res => res.json())
+      .then(data => setData(data))
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [])
 
   return (
     <div>
-      <p>lalala</p>
-      {/*{ data && data.map(([key, value]) => (*/}
-      {/*  return (*/}
-      {/*    <div key={key}>*/}
-      {/*      <h3>{key}</h3>*/}
-      {/*      <p>{value}</p>*/}
-      {/*      <p>Latest updated: {lastModifiedAt}</p>*/}
-      {/*      /!*<div key={index} {...todoList}/>*!/*/}
-      {/*    </div>*/}
-      {/*  )*/}
-      {/*))}*/}
+      { data && data.map((todoList, index) => {
+        {console.log(todoList)}
+        {Object.entries(todoList).forEach((prop)=> console.log(prop))}
+        {console.log(JSON.stringify(todoList, null, 4))}
+        {console.log(todoList.title)}
+
+        return (
+          <div>
+            <h3> TodoList:</h3>
+            <List key={index} {...todoList}/>
+          </div>
+        )
+      })}
     </div>
   )
 }
