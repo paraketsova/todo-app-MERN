@@ -54,8 +54,8 @@ export default function AllTodoListsPage() {
                 </td>
                 <td className="col2">{todoList.contents}</td>
                 <td className="col3">
-                  <button>
-                    <Link to={`/` + todoList._id}>Go to</Link>
+                  <button className="btn">
+                    <Link className="link" to={`/` + todoList._id}>edit</Link>
                   </button>
                 </td>
               </tr>

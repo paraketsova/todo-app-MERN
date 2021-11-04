@@ -6,7 +6,7 @@
 
 body {
   padding: 0.25rem;
-  font-family: 'Cabin Sketch', cursive;
+  font-family: 'Cabin Sketch', sans-serif;
 }
 
 h1 {
@@ -49,6 +49,33 @@ td, th {
   text-align: left;
 }
 
+.col2-title {
+  width: 20rem;
+  font-weight: bold;
+  font-size: 2rem;
+}
+
 .checkbox {
   cursor: pointer;
+}
+
+.btn {
+  background-color: #f66b36;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: all .2s ease-in-out;
+}
+.link {
+  text-decoration: none;
+  color:white;
+  font-family: 'Cabin Sketch', sans-serif;
+}
+
+.btn:hover {
+  opacity: 0.8;
+  transition: 0.5s;
+  transform: scale(1.02);
 }

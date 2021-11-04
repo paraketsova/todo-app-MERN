@@ -1,40 +1,56 @@
 import React, {useState, useEffect} from 'react';
-import { Link, useHistory } from 'react-router-dom';
 
 export default function ListDetailsPage(props) {
   const [data, setData] = useState(null);
-  const [todoList, setTodoList] = useState(null);
-  const [errorMessage, setErrorMessage] = useState();
+  const [loading, setLoading] = useState(true);
 
-  const history = useHistory();
-
-  //const todoId = match.url.split("/")[3];
   const todoId = props.match.params.id;
 
-  useEffect(() => {
+  const fetchData = async () => {
+    setLoading(true);
     const url = 'http://localhost:3000/api/todo/lists';
-    fetch(url)
-      .then(res => res.json())
-      .then(data => setData(data))
-  });
+    const res = await fetch(url);
+    const data = await res.json();
+    const [item] = data.filter((item) => item._id === todoId);
+    console.log({ item });
+    setData(item);
+    setLoading(false);
+  };
 
   useEffect(() => {
-    if (data) {
-      const [item] = data.filter((item) => item._id === todoId);
-      if (!item) {
-        setErrorMessage("No task with that id was found in the database");
-        return;
-      }
-      setTodoList(item);
-    }
-  }, [data, todoId]);
-
+    fetchData();
+  }, [])
 
   return (
     <>
-      <p>bebebe</p>
-      <p>{todoId}</p>
+      <header>
+        <h1>Your TODOlist</h1>
+      </header>
+      {loading ? (
+        <p className="load">Loading...</p>
+      ) : !data ? (
+        <p>Something went wrong</p>
+      ) : (
+        <>
+          <p>{todoId}</p>
+          <table>
+            <tbody>
+              <tr>
+                <th className="col1">Title</th>
+                <td className="col2">{data.title}</td>
+              </tr>
+              <tr>
+                <th className="col1">Contents</th>
+                <td className="col2">{data.contents}</td>
+              </tr>
+              <tr>
+                <th className="col1">Latest updated</th>
+                <td className="col2">{data.lastModifiedAt}</td>
+              </tr>
+            </tbody>
+          </table>
+        </>
+      )}
     </>
-
   )
 }
