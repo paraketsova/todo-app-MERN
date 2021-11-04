@@ -33,7 +33,7 @@ export default function AllTodoListsPage() {
           <tr>
             <th className="col1">Title</th>
             <th className="col2">Contents</th>
-            <th className="col3">Edit task</th>
+            <th className="col3"></th>
           </tr>
           </thead>
           <tbody>
@@ -55,7 +55,7 @@ export default function AllTodoListsPage() {
                 <td className="col2">{todoList.contents}</td>
                 <td className="col3">
                   <button className="btn">
-                    <Link className="link" to={`/` + todoList._id}>edit</Link>
+                    <Link className="link" to={`/` + todoList._id}>go to →</Link>
                   </button>
                 </td>
               </tr>

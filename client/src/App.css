@@ -22,8 +22,8 @@ h1 {
 table {
   border-collapse: collapse;
   margin: 0 auto;
-  background-color: #eeeeee;
   color: black;
+  border: none;
 }
 
 .col1 {
@@ -34,8 +34,9 @@ table {
   width: 30rem;
 }
 
-.col2 {
-  width: 20rem;
+.col3 {
+  background-color: white;
+  border: none;
 }
 
 th {
@@ -51,22 +52,28 @@ td, th {
 
 .col2-title {
   width: 20rem;
+  color: orangered;
+  text-transform: uppercase;
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.2rem;
 }
 
 .checkbox {
   cursor: pointer;
+  color: orangered;
+  text-transform: uppercase;
 }
 
 .btn {
   background-color: #f66b36;
-  font-size: 18px;
-  padding: 10px 20px;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
   border-radius: 10px;
   cursor: pointer;
   border: none;
   transition: all .2s ease-in-out;
+  color:white;
+  font-family: 'Cabin Sketch', sans-serif;
 }
 .link {
   text-decoration: none;
@@ -78,4 +85,5 @@ td, th {
   opacity: 0.8;
   transition: 0.5s;
   transform: scale(1.02);
+  color: #330000;
 }

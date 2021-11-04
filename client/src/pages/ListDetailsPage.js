@@ -18,7 +18,7 @@ export default function ListDetailsPage(props) {
   };
 
   useEffect(() => {
-    fetchData();
+    fetchData().then();
   }, [])
 
   return (
@@ -37,15 +37,24 @@ export default function ListDetailsPage(props) {
             <tbody>
               <tr>
                 <th className="col1">Title</th>
-                <td className="col2">{data.title}</td>
+                <td className="col2-title">{data.title}</td>
+                <td className="col3">
+                  <button className="btn">edit task</button>
+                </td>
               </tr>
               <tr>
                 <th className="col1">Contents</th>
                 <td className="col2">{data.contents}</td>
+                <td className="col3">
+                  <button className="btn">edit task</button>
+                </td>
               </tr>
               <tr>
                 <th className="col1">Latest updated</th>
                 <td className="col2">{data.lastModifiedAt}</td>
+                <td className="col3">
+                <button className="btn">edit task</button>
+                </td>
               </tr>
             </tbody>
           </table>
