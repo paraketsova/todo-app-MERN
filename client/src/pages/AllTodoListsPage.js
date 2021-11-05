@@ -23,7 +23,7 @@ export default function AllTodoListsPage() {
   return (
     <div>
       <header>
-        <h1>Your TODOlist</h1>
+        <h1>Your TODOlists</h1>
       </header>
       {loading ? (
         <p className="load">Loading...</p>
@@ -38,10 +38,13 @@ export default function AllTodoListsPage() {
             return (
               <div className="list" key={i}>
                 <table>
-                  {/*{console.log(data)}*/}
                   <tbody>
                     <tr key={todoList._id}>
-                      <th className="col1">{todoList.title}</th>
+                      <th className="list-col">{todoList.title}
+                        <button className="btn">
+                          <Link className="link" to={`/` + todoList._id}>edit</Link>
+                        </button>
+                      </th>
                     </tr>
 
                     { todoList.tasks && todoList.tasks.map((task, i) => (
