@@ -1,17 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const TodoLists = require('../models/todoListsModel');
+const todoItem = require('../models/todoModel')
 
-// function nameFilter(user, query) {         //
-//   return user.toLowerCase().indexOf(query.toLowerCase()) != -1;
-// }
-//
-// function searchUser(input) {
-//   return lists.filter();
-// }
 
 router.get('/', async function (req, res, next) {
-  const todoLists = await TodoLists.find();
+  const todoLists = await todoItem.find();
   res.json(todoLists);
 });
 
@@ -21,7 +15,7 @@ router.get('/favicon.ico', async function (req, res) {
 
 router.get('/:id', async function (req, res, next) {
   const { id } = req.params;
-  const todoList = await TodoLists.findOne({ _id: id });
+  const todoList = await todoItem.findOne({ _id: id });
   res.json(todoList);
 });
 
@@ -32,13 +26,27 @@ router.get('/:id', async function (req, res, next) {
 //   res.json(lists);
 // });
 
-router.post('/api/lists/:id', function(req, res, next) {
-
-});
-
 // // -- UPDATE ROUTES -- //
+/* PUT modify a specific todo-list */
+// router.put('/:id', (req, res) => {
+//   const id = req.params.id;
+//   const { title, contents } = req.body;
 //
-//
+//   todoLists.findByIdAndUpdate(
+//     _id,
+//     {
+//       title,
+//       contents,
+//       lastModifiedAt,
+//       completed
+//     },
+//   )
+//     .then((list) => {
+//       res.json(list)
+//     })
+// })
+
+//});
 // // -- DELETE ROUTES -- //
 //
 // router.delete('/api/lists/:id', function(req, res, next) {

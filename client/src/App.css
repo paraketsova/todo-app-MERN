@@ -19,6 +19,19 @@ h1 {
   text-align: center;
 }
 
+.all-lists {
+  text-align: center;
+  margin: 5rem 3rem;
+  /*border: solid 1px green;*/
+}
+
+.list {
+  width: 10rem;
+  display: inline-flex;
+  justify-content: space-between;
+  margin: 0 3rem;
+}
+
 table {
   border-collapse: collapse;
   margin: 0 auto;
@@ -26,22 +39,11 @@ table {
   border: none;
 }
 
-.col1 {
-  width: 10rem;
-  font-weight: bold;
-}
-.col2 {
-  width: 30rem;
-}
-
-.col3 {
-  background-color: white;
-  border: none;
-}
-
 th {
-  background-color: #f8bb8d;
+  text-transform: uppercase;
+  background-color: darkorange;
   font-size: larger;
+  color: white;
 }
 
 td, th {
@@ -50,18 +52,17 @@ td, th {
   text-align: left;
 }
 
-.col2-title {
-  width: 20rem;
-  color: orangered;
-  text-transform: uppercase;
-  font-weight: bold;
-  font-size: 1.2rem;
-}
+/*.col2-title {*/
+/*  width: 20rem;*/
+/*  color: orangered;*/
+/*  text-transform: uppercase;*/
+/*  font-weight: bold;*/
+/*  font-size: 1.2rem;*/
+/*}*/
 
 .checkbox {
   cursor: pointer;
-  color: orangered;
-  text-transform: uppercase;
+  color: #444444;
 }
 
 .btn {
@@ -86,4 +87,30 @@ td, th {
   transition: 0.5s;
   transform: scale(1.02);
   color: #330000;
+}
+
+.input {
+  width: inherit;
+  outline: none;
+  border: none;
+  cursor: text;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+  text-transform: inherit;
+}
+
+.col1 {
+  width: 10rem;
+  font-weight: bold;
+}
+
+.col2 {
+  width: 30rem;
+}
+
+.col3 {
+  background-color: white;
+  border: none;
 }
