@@ -75,23 +75,15 @@ td, th {
   font-family: inherit;
 }
 
-.btn:hover {
+button:hover {
   opacity: 0.9;
   transition: 0.5s;
   transform: scale(1.02);
-}
-
-.btn:hover .link {
   color: black;
 }
 
-.td-textarea  textarea.input {
-  align-items: center;
-  width: inherit;
-}
-
-.input {
-  width: inherit;
+input.input {
+  width: 20rem;
   outline: none;
   border: none;
   cursor: text;
@@ -103,11 +95,37 @@ td, th {
   align-items: inherit;
 }
 
+.th-title {
+  height: 3rem;
+  width: 20rem;
+}
+
+.th-title input.input {
+  background-color: darkorange;
+  padding-left: 1rem;
+  width: 19rem;
+}
+
+.tr-task {
+  padding: 0 0;
+}
+
+.td-task {
+  padding: 0 0;
+  width: 20rem;
+}
+
+.td-task input.input {
+  height: 3rem;
+  width: inherit;
+  margin: 0;
+  padding-left: 1rem;
+}
+
 .list-col {
   align-items: center;
   padding-left: 0.6rem;
   font-weight: bold;
-
 }
 
 table, .list-col {
@@ -121,4 +139,19 @@ table, .list-col {
 .lastModifiedAt {
   text-align: center;
   margin-top: 2rem;
+}
+
+.btn-clmn {
+  border: none;
+}
+.btn-orange {
+  background-color: darkorange;
+  color: white;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: all .2s ease-in-out;
+  font-family: inherit;
 }

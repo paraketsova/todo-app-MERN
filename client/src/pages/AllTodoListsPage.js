@@ -9,7 +9,7 @@ export default function AllTodoListsPage() {
 
   const fetchData = async () => {
     setLoading(true);
-    const url = 'http://localhost:3000/api/todo/lists';
+    const url = 'http://localhost:3000/api/';
     const res = await fetch(url);
     const data = await res.json();
     setData(data);

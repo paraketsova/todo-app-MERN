@@ -17,6 +17,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/api/todo/lists', todoRouter);
+app.use('/api', todoRouter);
 
 module.exports = app;
