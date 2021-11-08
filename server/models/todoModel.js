@@ -8,7 +8,7 @@ const TodoListsModel = new Schema({
     required: true,
   },
   tasks: [{
-    task: {
+    text: {
       type:String
     },
     completed: {

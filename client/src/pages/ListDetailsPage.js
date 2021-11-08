@@ -34,7 +34,7 @@ export default function ListDetailsPage(props) {
     const handleOnChangeTask = (i) => (event) => {
       event.preventDefault();
       const newTasks = [...tasks];
-      newTasks[i].task = event.target.value;
+      newTasks[i].text = event.target.value;
       setTasks(newTasks);
     };
 
@@ -55,7 +55,7 @@ export default function ListDetailsPage(props) {
       event.preventDefault();
       setLoading(true);
       const url = `http://localhost:3000/api/tasks/update/${todoId}`;
-      const newTaskText = tasks[i].task;
+      const newTaskText = tasks[i].text;
       console.log(newTaskText);
       await fetch(url, {
         method: 'PUT',
@@ -108,8 +108,8 @@ export default function ListDetailsPage(props) {
                       type="text"
                       className="input"
                       name="task"
-                      placeholder={tasks[i].task}
-                      value={tasks[i].task}
+                      placeholder={tasks[i].text}
+                      value={tasks[i].text}
                       size={50}
                       onChange={handleOnChangeTask(i)}
                     />

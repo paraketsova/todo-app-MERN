@@ -52,7 +52,7 @@ export default function AllTodoListsPage() {
                         <td>
                           <label className="checkbox" htmlFor={todoList._id + task + i}>
                             <input type="checkbox" id={todoList._id + task + i} name={todoList._id + task + i}/>
-                            {task.task}
+                            {task.text}
                           </label>
                         </td>
                       </tr>
