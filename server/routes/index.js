@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const TodoLists = require('../models/todoListsModel');
+
 const todoItem = require('../models/todoModel')
 
 router.get('/favicon.ico', async function (req, res) {
@@ -33,12 +33,30 @@ router.put('/lists/update/:id', async function (req, res, next) {
   console.log(req.body.title, req.params.id);
   const id = req.params.id;
   const title = req.body.title;
-  const editedTodoList = await todoItem.findOneAndUpdate({ _id: id }, { title }, { new: true });
+  const editedTodoList = await todoItem.findOneAndUpdate(
+    { _id: id },
+    { title },
+    { new: true }
+  );
   res.json(editedTodoList); //TODO - add to client or delete
 });
 
 /* UPDATE task text */
-router.put('/tasks/update', (req, res) => {
+router.put('/tasks/update/:id', async function (req, res, next) {
+  console.log(req.params.id);
+  console.log(req.body.newTaskText);
+  console.log(req.body.i);
+  const id = req.params.id;
+  newTaskText = req.body.newTaskText;
+  i = req.body.i;
+  // const taskText = tasks[i].task;
+  const foundTodoTasks = await todoItem.findOne(
+    { _id: id },
+    // { tasks[i].task: newTaskText},
+    { new: true }
+  );
+  res.json(foundTodoTasks); //TODO - add to client or delete
+  console.log(foundTodoTasks);
 });
 
 /* UPDATE task status */
