@@ -39,7 +39,7 @@ export default function AllTodoListsPage() {
               <div className="list" key={i}>
                 <table>
                   <tbody>
-                    <tr key={todoList._id}>
+                    <tr>
                       <th className="list-col">{todoList.title}
                         <button className="btn">
                           <Link className="link" to={`/` + todoList._id}>edit</Link>
@@ -48,10 +48,10 @@ export default function AllTodoListsPage() {
                     </tr>
 
                     { todoList.tasks && todoList.tasks.map((task, i) => (
-                      <tr key={i}>
+                      <tr key={todoList._id + i}>
                         <td>
-                          <label className="checkbox" htmlFor={task + i}>
-                            <input type="checkbox" id={task + i} name={task + i}/>
+                          <label className="checkbox" htmlFor={todoList._id + task + i}>
+                            <input type="checkbox" id={todoList._id + task + i} name={todoList._id + task + i}/>
                             {task.task}
                           </label>
                         </td>
