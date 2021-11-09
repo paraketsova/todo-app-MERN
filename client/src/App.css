@@ -32,7 +32,7 @@ h1 {
   box-shadow: 8px 10px 8px #b2b2b2;
 }
 
-table {
+.table-all-lists {
   border-collapse: collapse;
   margin: 0 auto;
   color: black;
@@ -95,33 +95,6 @@ input.input {
   align-items: inherit;
 }
 
-.th-title {
-  height: 3rem;
-  width: 20rem;
-}
-
-.th-title input.input {
-  background-color: darkorange;
-  padding-left: 1rem;
-  width: 19rem;
-}
-
-.tr-task {
-  padding: 0 0;
-}
-
-.td-task {
-  padding: 0 0;
-  width: 20rem;
-}
-
-.td-task input.input {
-  height: 3rem;
-  width: inherit;
-  margin: 0;
-  padding-left: 1rem;
-}
-
 .list-col {
   align-items: center;
   padding-left: 0.6rem;
@@ -132,8 +105,48 @@ table, .list-col {
   width: 20rem;
 }
 
-.list-container {
+.wrapper {
+  display: flex;
+  flex-direction: column;
   text-align: center;
+}
+
+.list-container {
+  text-align: inherit;
+}
+
+.tr-task,
+.tr-title {
+  padding: 0 0;
+  display: inline-flex;
+}
+
+.td-task,
+.th-title {
+  padding: 0 0;
+  width: 20rem;
+  align-items: center;
+  border-bottom: solid 1px #424242;
+  border-left: solid 1px #424242;
+  border-right: solid 1px #424242;
+}
+
+.th-title {
+  background-color: darkorange;
+  font-size: larger;
+  color: white;
+}
+
+.th-title input.input {
+  background-color: darkorange;
+}
+
+.td-task input.input,
+.th-title input.input {
+  height: 3rem;
+  width: 18rem;
+  padding: 0 1rem 0 0;
+  margin: 0;
 }
 
 .lastModifiedAt {
@@ -141,8 +154,13 @@ table, .list-col {
   margin-top: 2rem;
 }
 
+
+.btn-task-clmn,
 .btn-clmn {
-  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
 }
 .btn-orange {
   background-color: darkorange;

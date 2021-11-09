@@ -51,12 +51,10 @@ export default function ListDetailsPage(props) {
     }
 
     const handleOnSubmitTask = (i) => async (event) => {
-      console.log('!!!!!!!!!!');
       event.preventDefault();
       setLoading(true);
       const url = `http://localhost:3000/api/tasks/update/${todoId}`;
       const newTaskText = tasks[i].text;
-      console.log(newTaskText);
       await fetch(url, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -75,54 +73,53 @@ export default function ListDetailsPage(props) {
         ) : !title ? (
           <p>Something went wrong</p>
         ) : (
-          <div className="list-container">
+          <div className="wrapper">
             <p>{ todoId }</p>       {/*TODO - delete test log*/}
-
-          <form onSubmit={handleOnSubmitTitle}>
-            <table>
-              <tbody>
-                <tr className="tr-title">
-                  <th className="th-title">
-                    <input
-                      className="input"
-                      type="text"
-                      name="title"
-                      placeholder={title}
-                      value={title}
-                      size={50}
-                      onChange={handleOnChangeTitle}
-                    />
-                  </th>
-                  <td className="btn-clmn">
-                    <button type="submit" onClick={handleOnSubmitTitle} className="btn-orange">edit title</button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </form>
-
-            {tasks && tasks.map((task, i) => (
-              <form key={"submit" + i} onSubmit={handleOnSubmitTask(i)}>
-                  <div key={i}>
-                    <input
-                      type="text"
-                      className="input"
-                      name="task"
-                      placeholder={tasks[i].text}
-                      value={tasks[i].text}
-                      size={50}
-                      onChange={handleOnChangeTask(i)}
-                    />
-                    <button type="submit" onClick={handleOnSubmitTask[i]} className="btn-orange">edit task</button>
+            <div className="list-container">
+              <form className="form-title" onSubmit={handleOnSubmitTitle}>
+                  <div className="tr-title">
+                    <div className="th-title">
+                      <input
+                        className="input"
+                        type="text"
+                        name="title"
+                        placeholder={title}
+                        value={title}
+                        size={50}
+                        onChange={handleOnChangeTitle}
+                      />
+                    </div>
+                    <div className="btn-clmn">
+                      <button type="submit" onClick={handleOnSubmitTitle} className="btn-orange">edit</button>
+                    </div>
                   </div>
-
               </form>
-            ))}
 
+              {tasks && tasks.map((task, i) => (
+                <form key={"submit" + i} onSubmit={handleOnSubmitTask(i)}>
+                  <div key={i} className="tr-task">
+                    <div className="td-task">
+                      <input
+                        type="text"
+                        className="input"
+                        name="task"
+                        placeholder={tasks[i].text}
+                        value={tasks[i].text}
+                        size={50}
+                        onChange={handleOnChangeTask(i)}
+                      />
+                    </div>
+                    <div className="btn-task-clmn">
+                      <button type="submit" onClick={handleOnSubmitTask[i]} className="btn-orange">edit</button>
+                    </div>
+                  </div>
+                </form>
+              ))}
+            </div>
 
-          <div className="lastModifiedAt">
-            Edited: {lastModifiedAt}
-          </div>
+            <div className="lastModifiedAt">
+              Edited: {lastModifiedAt}
+            </div>
         </div>
       )}
     </>

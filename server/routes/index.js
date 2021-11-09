@@ -43,22 +43,21 @@ router.put('/lists/update/:id', async function (req, res, next) {
 
 /* UPDATE task text */
 router.put('/tasks/update/:id', async function (req, res, next) {
-  console.log(req.params.id);
-  console.log(req.body.newTaskText);
-  console.log(req.body.i);
   const id = req.params.id;
-  newTaskText = req.body.newTaskText;
-  i = req.body.i;
-  // const taskText = tasks[i].task;
-  const foundList = await todoItem.findOne(
-    { _id: id },
-    // { tasks[i].task: newTaskText},
-    { new: false }
-  );
-  // res.json(foundTodoTasks); //TODO - add to client or delete
-  console.log(foundList);
-  // const updateTodoTask =
+  const newTaskText = req.body.newTaskText;
+  const i = req.body.i;
 
+  const { tasks } = await todoItem.findOne({ _id: id });
+  tasks[i].text = newTaskText;
+
+  const updateTaskText = await todoItem.findOneAndUpdate(
+    { _id: id },
+    { tasks },
+    // { lastModifiedAt: Date.now },
+    { new: true }
+  );
+  res.json(updateTaskText);
+ console.log(updateTaskText);
 });
 
 /* UPDATE task status */
