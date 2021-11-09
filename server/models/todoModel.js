@@ -18,7 +18,7 @@ const TodoListsModel = new Schema({
   }],
   lastModifiedAt: {
     type: Date,
-    default: Date.now,
+    // default: Date.now,
   },
 
 });

@@ -26,7 +26,6 @@ export default function ListDetailsPage(props) {
   /* UPDATE edited data on submit */
 
     const handleOnChangeTitle = (event) => {
-      console.log("test change title");
       event.preventDefault();
       setTitle(event.target.value);
     };

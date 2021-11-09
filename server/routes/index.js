@@ -53,15 +53,31 @@ router.put('/tasks/update/:id', async function (req, res, next) {
   const updateTaskText = await todoItem.findOneAndUpdate(
     { _id: id },
     { tasks },
-    // { lastModifiedAt: Date.now },
+// { lastModifiedAt: new Date() },
     { new: true }
   );
   res.json(updateTaskText);
- console.log(updateTaskText);
+  console.log(updateTaskText);
 });
 
 /* UPDATE task status */
-router.put('/tasks/complete', (req, res) => {
+router.put('/tasks/complete/:id', async function (req, res, next) {
+  const id = req.params.id;
+  const i = req.body.i;
+  const newStatus = req.body.newStatus;
+  console.log (id, i, newStatus);
+
+  const { tasks } = await todoItem.findOne({ _id: id });
+  tasks[i].completed = newStatus;
+
+  const updateTaskStatus = await todoItem.findOneAndUpdate(
+    { _id: id },
+    { tasks },
+// { lastModifiedAt: new Date() },
+    { new: true }
+  );
+  res.json(updateTaskStatus);
+  console.log(updateTaskStatus);
 });
 
 /* DELETE list */
