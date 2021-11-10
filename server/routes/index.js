@@ -25,10 +25,29 @@ router.post('/lists/add', (req, res) => {
 });
 
 /* ADD new task */
-router.post('/tasks/add', (req, res) => {
+router.post('/tasks/add/:id', async function (req, res, next) {
+  console.log(req.body.newText, req.params.id);
+  const id = req.params.id;
+  const newText = req.body.newText;
+  const typeT = typeof(newText);
+  console.log("typeT= " + typeT);
+  console.log(newText);
+  const { tasks } = await todoItem.findOne({ _id: id });
+  tasks.push({
+    text: newText,
+    completed: false,
+  });
+ const todoListNewTask = await todoItem.findOneAndUpdate(
+   { _id: id },
+   { tasks },
+// { lastModifiedAt: new Date() },
+   { new: true }
+ );
+  res.json(todoListNewTask);
+  console.log(todoListNewTask);
 });
 
-/* Modify list title */
+/* UPDATE list title */
 router.put('/lists/update/:id', async function (req, res, next) {
   console.log(req.body.title, req.params.id);
   const id = req.params.id;

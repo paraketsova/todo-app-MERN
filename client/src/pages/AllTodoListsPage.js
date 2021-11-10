@@ -6,8 +6,8 @@ export default function AllTodoListsPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
   // const [tasks, setTasks] = useState([]);
-  // const [status, setStatus] = useState(false);
-  const [newTaskText, setNewTaskText] = useState("");
+  const [newTaskTexts, setNewTaskTexts] = useState({});
+  const [errorMessage, setErrorMessage] = useState();
 
   const fetchData = async () => {
     setLoading(true);
@@ -15,7 +15,6 @@ export default function AllTodoListsPage() {
     const res = await fetch(url);
     const data = await res.json();
     setData(data);
-    console.log(data);
     setLoading(false);
   };
 
@@ -26,15 +25,11 @@ export default function AllTodoListsPage() {
   /* UPDATE task status */
   const onChangeStatus = (_id, i) => async (event) => {
     event.preventDefault();
-    console.log("PUT status!");
     setLoading(true);
     const url = `http://localhost:3000/api/tasks/complete/${_id}`;
     const todoList = data.find((item) => item._id === _id);
-    console.log(todoList);
-    console.log(todoList.tasks[i].completed);
     const newStatus = !todoList.tasks[i].completed;
     todoList.tasks[i].completed = newStatus;
-    // setTasks(todoList.tasks);
     await fetch(url, {
       method: 'PUT',
       headers: { "Content-Type": "application/json" },
@@ -44,13 +39,37 @@ export default function AllTodoListsPage() {
   };
 
   /* ADD new task  */
-  const onSubmitNewTask = (event) => {
-    console.log("lalala");
+  const handleOnChangeNewTask = (_id) => (event) => {
+    event.preventDefault();
+    console.log(_id);
+    setNewTaskTexts(newTaskTexts => {
+      const newText = { ...newTaskTexts };
+      newText[_id] = {[_id]:  event.target.value};
+      return newText;
+    });
+    // setNewTaskTexts({});
+    console.log(newTaskTexts);
   };
 
-  const handleOnSubmitNewTask  = (inputValue) => (event) =>{
-    console.log(newTaskText);
+  const handleOnSubmitNewTask  = (_id) => async (event) => {
+    event.preventDefault();
+    console.log(newTaskTexts);
+    const newText = newTaskTexts[_id].[_id];
+    // if (newText === "" || undefined) {
+    //   setErrorMessage("Please enter a text for task.");
+    // } else {
+      console.log(newText);
+      setLoading(true);
+      const url = `http://localhost:3000/api/tasks/add/${_id}`;
+      await fetch(url, {
+        method: 'POST',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ newText, _id })
+      });
+      setLoading(false);
+    // }
   };
+
 
   /* RENDERING */
   return (
@@ -88,7 +107,6 @@ export default function AllTodoListsPage() {
                               type="checkbox"
                               checked={task.completed}
                               onChange={onChangeStatus(todoList._id, i)}
-                              // onSubmit={handleOnSubmitStatus(todoList._id, i)}
                             />
                             <span className="checkmark"></span>
                             {task.text}
@@ -97,18 +115,33 @@ export default function AllTodoListsPage() {
                       </tr>
                     ))}
 
-                    <tr key={newTaskText._id}>
+                    <tr key={"newTask" + todoList.id}>
                       <td className="td-newTask">
-                        <form className="newTask" onSubmit={onSubmitNewTask}>
-                          <input placeholder="Add new task" value={newTaskText} onChange={handleOnSubmitNewTask}
-                                 className="inputField"/>
-                          <button className="btn-orange">add</button>
+                        <form className="newTask" onSubmit={handleOnSubmitNewTask(todoList._id)}>
+                          <input
+                            type="text"
+                            name="newTask"
+                            size={50}
+                            placeholder="Add new task"
+                            value={newTaskTexts._id}
+                            onChange={handleOnChangeNewTask(todoList._id)}
+                            className="inputField"
+                          />
+                          <button
+                            type="submit"
+                            onClick={handleOnSubmitNewTask}
+                            className="btn-orange">
+                              add
+                          </button>
                         </form>
                       </td>
                     </tr>
 
                   </tbody>
                 </table>
+                {/*<p className="errorMessage">*/}
+                {/*  {errorMessage}*/}
+                {/*</p>*/}
               </div>
             )
           })}

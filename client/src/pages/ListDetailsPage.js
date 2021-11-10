@@ -89,7 +89,12 @@ export default function ListDetailsPage(props) {
                       />
                     </div>
                     <div className="btn-clmn">
-                      <button type="submit" onClick={handleOnSubmitTitle} className="btn-orange">edit</button>
+                      <button
+                        type="submit"
+                        onClick={handleOnSubmitTitle}
+                        className="btn-orange">
+                          edit
+                      </button>
                     </div>
                   </div>
               </form>
@@ -102,14 +107,19 @@ export default function ListDetailsPage(props) {
                         type="text"
                         className="input"
                         name="task"
+                        size={50}
                         placeholder={tasks[i].text}
                         value={tasks[i].text}
-                        size={50}
                         onChange={handleOnChangeTask(i)}
                       />
                     </div>
                     <div className="btn-task-clmn">
-                      <button type="submit" onClick={handleOnSubmitTask[i]} className="btn-orange">edit</button>
+                      <button
+                        type="submit"
+                        onClick={handleOnSubmitTask[i]}
+                        className="btn-orange">
+                          edit
+                      </button>
                     </div>
                   </div>
                 </form>
