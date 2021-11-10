@@ -58,27 +58,24 @@ td, th {
 .checkbox {
   color: #444444;
   display: block;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
   position: relative;
   padding-left: 3rem;
-  padding-top: 0.4rem;
+  /*padding-top: 0.4rem;*/
   user-select: none;
   cursor: pointer;
   font-size: 1rem;
 }
 
-.checkbox input {
-  top: 50%;
-}
-
 .checkmark {
   position: absolute;
-  top: 0;
+  top: -0.3rem;
   left: 0;
-  width: 1.7rem;
-  height: 1.7rem;
+  width: 1.5rem;
+  height: 1.5rem;
   border: 1px solid #9297C7;
-  border-radius: .5rem;
+  border-radius: .4rem;
   transition: background .3s;
 }
 
