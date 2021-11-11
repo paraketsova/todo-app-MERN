@@ -78,27 +78,27 @@ export default function ListDetailsPage(props) {
           <div className="wrapper">
             <div className="list-container">
               <form className="form-title" onSubmit={handleOnSubmitTitle}>
-                  <div className="tr-title">
-                    <div className="th-title">
-                      <input
-                        className="input"
-                        type="text"
-                        name="title"
-                        placeholder={title}
-                        value={title}
-                        size={50}
-                        onChange={handleOnChangeTitle}
-                      />
-                    </div>
-                    <div className="btn-clmn">
-                      <button
-                        type="submit"
-                        onClick={handleOnSubmitTitle}
-                        className="btn-orange">
-                          edit
-                      </button>
-                    </div>
+                <div className="tr-title">
+                  <div className="th-title">
+                    <input
+                      className="input"
+                      type="text"
+                      name="title"
+                      placeholder={title}
+                      value={title}
+                      size={50}
+                      onChange={handleOnChangeTitle}
+                    />
                   </div>
+                  <div className="btn-clmn">
+                    <button
+                      type="submit"
+                      onClick={handleOnSubmitTitle}
+                      className="btn-orange">
+                        edit
+                    </button>
+                  </div>
+                </div>
               </form>
 
               {tasks && tasks.map((task, i) => (

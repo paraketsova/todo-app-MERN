@@ -64,7 +64,7 @@ export default function AllTodoListsPage() {
     const newList = await response.json();
     setLoading(false);
     setData(data => {
-      const newData = [ ... data];
+      const newData = [ ...data];
       const index = newData.findIndex(list => list._id === _id);
       newData[index] = newList;
       return newData;
@@ -91,11 +91,12 @@ export default function AllTodoListsPage() {
     const newList = await response.json();
     console.log(newList);
     setData(data => {
-      const newData = [ ... data];
+      const newData = [ ...data];
       newData.push(newList);
       console.log(newData);
       return newData;
     });
+    setNewTitle("")
     // setLoading(false);
   }
 

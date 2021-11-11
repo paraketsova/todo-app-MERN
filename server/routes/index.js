@@ -8,20 +8,20 @@ router.get('/favicon.ico', async function (req, res) {
   res.send();
 });
 
-/* READ all lists */
+/*  READ all lists  */
 router.get('/', async function (req, res, next) {
   const todoLists = await todoItem.find();
   res.json(todoLists);
 });
 
-/* READ one list (with all its tasks) */
+/*  READ one list (with all its tasks)  */
 router.get('/:id', async function (req, res, next) {
   const { id } = req.params;
   const todoList = await todoItem.findOne({ _id: id });
   res.json(todoList);
 });
 
-/* ADD new list */
+/*  ADD new list  */
 router.post('/lists/add', async function (req, res, next) {
   console.log(req.body.newTitle);
   const newTitle = req.body.newTitle;
@@ -33,7 +33,7 @@ router.post('/lists/add', async function (req, res, next) {
   res.json(newList);
 });
 
-/* ADD new task */
+/*  ADD new task  */
 router.post('/tasks/add/:id', async function (req, res, next) {
   console.log(req.body.newText, req.params.id);
   const id = req.params.id;
@@ -52,7 +52,7 @@ router.post('/tasks/add/:id', async function (req, res, next) {
   console.log(todoListNewTask);
 });
 
-/* UPDATE list title */
+/*  UPDATE list title  */
 router.put('/lists/update/:id', async function (req, res, next) {
   console.log(req.body.title, req.params.id);
   const id = req.params.id;
@@ -65,7 +65,7 @@ router.put('/lists/update/:id', async function (req, res, next) {
   res.json(editedTodoList); //TODO - add to client or delete
 });
 
-/* UPDATE task text */
+/*  UPDATE task text  */
 router.put('/tasks/update/:id', async function (req, res, next) {
   const id = req.params.id;
   const newTaskText = req.body.newTaskText;
@@ -83,7 +83,7 @@ router.put('/tasks/update/:id', async function (req, res, next) {
   console.log(updateTaskTextList);
 });
 
-/* UPDATE task status */
+/*  UPDATE task status  */
 router.put('/tasks/complete/:id', async function (req, res, next) {
   const id = req.params.id;
   const i = req.body.i;
@@ -102,11 +102,11 @@ router.put('/tasks/complete/:id', async function (req, res, next) {
   console.log(updateTaskStatus);
 });
 
-/* DELETE list */
+/*  DELETE list  */
 router.delete('/lists/:id', function(req, res, next) {
 });
 
-/* DELETE task */
+/*  DELETE task  */
 router.delete('/tasks/:id/:index', function(req, res, next) {
 });
 
