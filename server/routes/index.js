@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const todoItem = require('../models/todoModel')
+const {NativeDate} = require('mongoose');
 
 router.get('/favicon.ico', async function (req, res) {
   res.send();
@@ -21,7 +22,15 @@ router.get('/:id', async function (req, res, next) {
 });
 
 /* ADD new list */
-router.post('/lists/add', (req, res) => {
+router.post('/lists/add', async function (req, res, next) {
+  console.log(req.body.newTitle);
+  const newTitle = req.body.newTitle;
+  const newList = await todoItem.create({
+    title: newTitle,
+    tasks: [],
+    new: true
+  });
+  res.json(newList);
 });
 
 /* ADD new task */
@@ -29,9 +38,6 @@ router.post('/tasks/add/:id', async function (req, res, next) {
   console.log(req.body.newText, req.params.id);
   const id = req.params.id;
   const newText = req.body.newText;
-  const typeT = typeof(newText);
-  console.log("typeT= " + typeT);
-  console.log(newText);
   const { tasks } = await todoItem.findOne({ _id: id });
   tasks.push({
     text: newText,
@@ -40,7 +46,6 @@ router.post('/tasks/add/:id', async function (req, res, next) {
  const todoListNewTask = await todoItem.findOneAndUpdate(
    { _id: id },
    { tasks },
-// { lastModifiedAt: new Date() },
    { new: true }
  );
   res.json(todoListNewTask);
@@ -69,14 +74,13 @@ router.put('/tasks/update/:id', async function (req, res, next) {
   const { tasks } = await todoItem.findOne({ _id: id });
   tasks[i].text = newTaskText;
 
-  const updateTaskText = await todoItem.findOneAndUpdate(
+  const updateTaskTextList = await todoItem.findOneAndUpdate(
     { _id: id },
     { tasks },
-// { lastModifiedAt: new Date() },
     { new: true }
   );
-  res.json(updateTaskText);
-  console.log(updateTaskText);
+  res.json(updateTaskTextList);
+  console.log(updateTaskTextList);
 });
 
 /* UPDATE task status */
@@ -92,7 +96,6 @@ router.put('/tasks/complete/:id', async function (req, res, next) {
   const updateTaskStatus = await todoItem.findOneAndUpdate(
     { _id: id },
     { tasks },
-// { lastModifiedAt: new Date() },
     { new: true }
   );
   res.json(updateTaskStatus);

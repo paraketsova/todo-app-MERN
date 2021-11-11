@@ -21,8 +21,7 @@ h1 {
 
 .all-lists {
   text-align: center;
-  margin: 3rem 1rem;
-  /*border: solid 1px green;*/
+  margin: 0 1rem 3rem 1rem;
 }
 
 .list {
@@ -120,6 +119,7 @@ input[type="checkbox"] {
   transition: all .2s ease-in-out;
   font-family: inherit;
 }
+
 .link {
   text-decoration: none;
   color: orangered;
@@ -177,9 +177,13 @@ table, .list-col {
   padding: 0 0;
   width: 20rem;
   align-items: center;
-  border-bottom: solid 1px #424242;
-  border-left: solid 1px #424242;
-  border-right: solid 1px #424242;
+  border-bottom: solid 1px darkred;
+  border-left: solid 1px darkred;
+  border-right: solid 1px darkred;
+}
+
+.th-title {
+  border-top: solid 1px darkred;
 }
 
 .th-title {
@@ -243,6 +247,44 @@ table, .list-col {
   align-items: inherit;
 }
 
-.newTask {
+.newTask,
+.newList {
   color: white;
+}
+
+.tr-newTitle {
+  padding: 0 0;
+  display: inline-flex;
+  margin-bottom: 2rem;
+  box-shadow: 8px 10px 8px #b2b2b2;
+}
+
+.th-newTitle {
+  background-color: #b2b2b2;
+  color: white;
+  border: 1px solid #444444;
+  text-transform: uppercase;
+  font-size: larger;
+  font-weight: bolder;
+}
+
+
+.th-newTitle input.input {
+  height: 3rem;
+  margin: 0;
+  padding-left: 1rem;
+  background-color: #b2b2b2;
+}
+
+.btn-newTitle {
+  background-color: #fcfbfb;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: all .2s ease-in-out;
+  font-family: inherit;
+  margin: 0.5rem;
+  color: orangered;
 }

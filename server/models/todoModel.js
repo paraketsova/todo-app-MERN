@@ -2,26 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const TodoListsModel = new Schema({
-
-  title: {
-    type: String,
-    required: true,
-  },
-  tasks: [{
-    text: {
-      type:String
+    title: {
+      type: String,
+      required: true,
     },
-    completed: {
-      type: Boolean,
-      default: false,
-    }
-  }],
-  lastModifiedAt: {
-    type: Date,
-    // default: Date.now,
+    tasks: [{
+      text: {
+        type:String
+      },
+      completed: {
+        type: Boolean,
+        default: false,
+      }
+    }],
   },
-
-});
+  { timestamps: true }
+);
 
 const TodoLists = mongoose.model('todoItem', TodoListsModel);
 

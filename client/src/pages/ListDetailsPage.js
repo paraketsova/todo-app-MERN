@@ -16,7 +16,7 @@ export default function ListDetailsPage(props) {
       const item = await res.json();
       setTitle(item.title);
       setTasks(item.tasks);
-      setLastModifiedAt(item.lastModifiedAt);
+      setLastModifiedAt(item.updatedAt);
       setLoading(false);
     };
 
@@ -54,12 +54,16 @@ export default function ListDetailsPage(props) {
       setLoading(true);
       const url = `http://localhost:3000/api/tasks/update/${todoId}`;
       const newTaskText = tasks[i].text;
-      await fetch(url, {
+      const response =  await fetch(url, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ newTaskText, i })
       });
+      const updateTaskTextList = await response.json();
       setLoading(false);
+
+      console.log(updateTaskTextList);
+      setLastModifiedAt(updateTaskTextList.updatedAt);
     };
 
     return (
@@ -72,7 +76,6 @@ export default function ListDetailsPage(props) {
         )}
         {title && (
           <div className="wrapper">
-            <p>{ todoId }</p>       {/*TODO - delete test log*/}
             <div className="list-container">
               <form className="form-title" onSubmit={handleOnSubmitTitle}>
                   <div className="tr-title">

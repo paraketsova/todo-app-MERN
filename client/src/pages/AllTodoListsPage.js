@@ -5,9 +5,8 @@ import {Link} from 'react-router-dom';
 export default function AllTodoListsPage() {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
-  // const [tasks, setTasks] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
   const [newTaskTexts, setNewTaskTexts] = useState({});
-  const [errorMessage, setErrorMessage] = useState();
 
   const fetchData = async () => {
     setLoading(true);
@@ -22,7 +21,7 @@ export default function AllTodoListsPage() {
     fetchData();
   }, [])
 
-  /* UPDATE task status */
+  /*  UPDATE task status  */
   const onChangeStatus = (_id, i) => async (event) => {
     event.preventDefault();
     setLoading(true);
@@ -38,7 +37,7 @@ export default function AllTodoListsPage() {
     setLoading(false);
   };
 
-  /* ADD new task  */
+  /*  ADD new TASK  */
   const handleOnChangeNewTask = (_id) => (event) => {
     event.preventDefault();
     console.log(_id);
@@ -47,7 +46,6 @@ export default function AllTodoListsPage() {
       newText[_id] = {[_id]:  event.target.value};
       return newText;
     });
-    // setNewTaskTexts({});
     console.log(newTaskTexts);
   };
 
@@ -73,8 +71,35 @@ export default function AllTodoListsPage() {
     });
   };
 
+  /*  ADD new LIST  */
+  const  handleOnChangeNewTitle = (event) => {
+    event.preventDefault();
+    setNewTitle(event.target.value);
+    console.log(newTitle);
+  };
 
-  /* RENDERING */
+  async function handleOnSubmitNewTitle(event) {
+    event.preventDefault();
+    console.log(newTitle);
+    // setLoading(true);
+    const url = `http://localhost:3000/api/lists/add`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ newTitle })
+    });
+    const newList = await response.json();
+    console.log(newList);
+    setData(data => {
+      const newData = [ ... data];
+      newData.push(newList);
+      console.log(newData);
+      return newData;
+    });
+    // setLoading(false);
+  }
+
+  /*  RENDERING  */
   return (
     <div>
       <header>
@@ -83,8 +108,33 @@ export default function AllTodoListsPage() {
       {loading && (
         <p className="load">Loading...</p>
       )}
+
       {data && (
         <div className="all-lists">
+          <div>
+            <form className="newList" onSubmit={handleOnSubmitNewTitle}>
+              <div className="tr-newTitle">
+                <div className="th-newTitle">
+                  <input
+                    className="input"
+                    type="text"
+                    name="title"
+                    placeholder="Add new title"
+                    value={newTitle}
+                    size={50}
+                    onChange={handleOnChangeNewTitle}
+                  />
+                  <button
+                    type="submit"
+                    onClick={handleOnSubmitNewTitle}
+                    className="btn-newTitle">
+                    add
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
           {data.map((todoList, i) => {
             // {console.log(todoList)}
             // {Object.entries(todoList).forEach((prop)=> console.log(prop))}
