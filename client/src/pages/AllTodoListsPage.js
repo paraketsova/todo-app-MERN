@@ -55,19 +55,24 @@ export default function AllTodoListsPage() {
     event.preventDefault();
     console.log(newTaskTexts);
     const newText = newTaskTexts[_id].[_id];
-    // if (newText === "" || undefined) {
-    //   setErrorMessage("Please enter a text for task.");
-    // } else {
-      console.log(newText);
-      setLoading(true);
-      const url = `http://localhost:3000/api/tasks/add/${_id}`;
-      await fetch(url, {
+    console.log(newText);
+    setLoading(true);
+    const url = `http://localhost:3000/api/tasks/add/${_id}`;
+    const response = await fetch(url, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ newText, _id })
       });
-      setLoading(false);
-    // }
+    const newList = await response.json();
+    setLoading(false);
+      setData(data => {
+        const newData = [ ... data];
+        const index = newData.findIndex(list => list._id === _id);
+        console.log(index);
+        newData[index] = newList;
+        return newData;
+      })
+
   };
 
 
