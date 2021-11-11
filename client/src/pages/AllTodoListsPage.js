@@ -65,14 +65,12 @@ export default function AllTodoListsPage() {
       });
     const newList = await response.json();
     setLoading(false);
-      setData(data => {
-        const newData = [ ... data];
-        const index = newData.findIndex(list => list._id === _id);
-        console.log(index);
-        newData[index] = newList;
-        return newData;
-      })
-
+    setData(data => {
+      const newData = [ ... data];
+      const index = newData.findIndex(list => list._id === _id);
+      newData[index] = newList;
+      return newData;
+    });
   };
 
 
@@ -82,11 +80,12 @@ export default function AllTodoListsPage() {
       <header>
         <h1>Your TODOlists</h1>
       </header>
-      {loading ? (
+      {loading && (
         <p className="load">Loading...</p>
-      ) : (
+      )}
+      {data && (
         <div className="all-lists">
-          { data && data.map((todoList, i) => {
+          {data.map((todoList, i) => {
             // {console.log(todoList)}
             // {Object.entries(todoList).forEach((prop)=> console.log(prop))}
             // {console.log(JSON.stringify(todoList, null, 4))}

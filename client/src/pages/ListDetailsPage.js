@@ -67,11 +67,10 @@ export default function ListDetailsPage(props) {
         <header>
           <h1>Your TODOlist</h1>
         </header>
-        {loading ? (
+        {loading && (
           <p className="load">Loading...</p>
-        ) : !title ? (
-          <p>Something went wrong</p>
-        ) : (
+        )}
+        {title && (
           <div className="wrapper">
             <p>{ todoId }</p>       {/*TODO - delete test log*/}
             <div className="list-container">
