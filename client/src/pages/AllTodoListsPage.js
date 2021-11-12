@@ -7,14 +7,21 @@ export default function AllTodoListsPage() {
   const [loading, setLoading] = useState(false);
   const [newTitle, setNewTitle] = useState("");
   const [newTaskTexts, setNewTaskTexts] = useState({});
+  const [errorMessage, setErrorMessage] = useState("");
 
   const fetchData = async () => {
     setLoading(true);
     const url = 'http://localhost:3000/api/';
     const res = await fetch(url);
     const data = await res.json();
-    setData(data);
-    setLoading(false);
+
+    if (res.statusCode ===404) {
+      setLoading(false);
+      setErrorMessage(res.statusMessage);
+    } else {
+      setData(data);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -109,10 +116,12 @@ export default function AllTodoListsPage() {
       <header>
         <h1>Your TODOlists</h1>
       </header>
+      <div>
+        {errorMessage}
+      </div>
       {loading && (
         <p className="load">Loading...</p>
       )}
-
       {data && (
         <div className="all-lists">
           <div>
