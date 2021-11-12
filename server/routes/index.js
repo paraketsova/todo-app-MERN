@@ -113,29 +113,23 @@ router.put('/tasks/update/:id', async function (req, res) {
     res.statusMessage = 'Invalid id';
     res.end('Invalid id');
   } else {
-    if (!i) {
-      res.statusCode = 500;
-      res.statusMessage = 'Invalid task';
-      res.end('Invalid task');
-    } else {
-      //   Find TODOList in DB
-      const { tasks } = await todoItem.findOne({_id: id});
-      tasks[i].text = newTaskText;
-      // Update one task's text in TODOlist
-      const updatedTodoList = await todoItem.findOneAndUpdate(
-        {_id: id},
-        {tasks},
-        {new: true}
-      );
+    //   Find TODOList in DB
+    const { tasks } = await todoItem.findOne({_id: id});
+    tasks[i].text = newTaskText;
+    // Update one task's text in TODOlist
+    const updatedTodoList = await todoItem.findOneAndUpdate(
+      {_id: id},
+      {tasks},
+      {new: true}
+    );
 
-      if (!updatedTodoList) {
-        res.statusCode = 404;
-        res.statusMessage = 'List Not Found';
-        res.end('List Not found');
-      } else {
-        res.statusCode = 200;
-        res.json(updatedTodoList);
-      }
+    if (!updatedTodoList) {
+      res.statusCode = 404;
+      res.statusMessage = 'List Not Found';
+      res.end('List Not found');
+    } else {
+      res.statusCode = 200;
+      res.json(updatedTodoList);
     }
   }
 });
