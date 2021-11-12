@@ -26,7 +26,6 @@ export default function ListDetailsPage(props) {
   }, [todoId])
 
   /*  UPDATE edited data on submit  */
-
     const handleOnChangeTitle = (event) => {
       event.preventDefault();
       setTitle(event.target.value);
@@ -64,7 +63,6 @@ export default function ListDetailsPage(props) {
       const updateTaskTextList = await response.json();
       setLoading(false);
 
-      console.log(updateTaskTextList);
       setLastModifiedAt(updateTaskTextList.updatedAt);
     };
 
@@ -77,18 +75,13 @@ export default function ListDetailsPage(props) {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },
       })
-        .then(() => history.push("/"));
-      setLoading(false);
-      // ADD a transition to the main page
+      history.push("/");
     }
 
     /*  DELETE one TASK on submit  */
     const handleDeleteTask = (i) => async (event) => {
       event.preventDefault();
-      console.log(i);
-      console.log(tasks[i]);
 
-      console.log ("newTasks: " + tasks);
       setLoading(true);
       const url = `http://localhost:3000/api/tasks/delete/${todoId}`;
       await fetch(url, {
@@ -96,7 +89,7 @@ export default function ListDetailsPage(props) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ i })
       });
-      const deletedTasks =  tasks.splice(i, 1);
+      tasks.splice(i, 1);
       setTasks(tasks);
       setLoading(false);
     }
@@ -137,7 +130,7 @@ export default function ListDetailsPage(props) {
                     <button
                       onClick={handleDeleteList}
                       className="btn-red">
-                      delete
+                        delete
                     </button>
                   </div>
                 </div>
@@ -170,7 +163,7 @@ export default function ListDetailsPage(props) {
                       <button
                         onClick={handleDeleteTask(i)}
                         className="btn-red">
-                        delete
+                          delete
                       </button>
                     </div>
                   </div>

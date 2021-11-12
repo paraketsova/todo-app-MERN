@@ -179,12 +179,8 @@ export default function AllTodoListsPage() {
                         </form>
                       </td>
                     </tr>
-
                   </tbody>
                 </table>
-                {/*<p className="errorMessage">*/}
-                {/*  {errorMessage}*/}
-                {/*</p>*/}
               </div>
             )
           })}

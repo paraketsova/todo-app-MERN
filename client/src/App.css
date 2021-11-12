@@ -159,23 +159,17 @@ table, .list-col {
 
 .wrapper {
   text-align: center;
-  border: solid 1px green;
   justify-content: center;
   max-width: 30rem;
   margin-left: 35%;
 }
 
 .list-container {
-  border: solid 1px red;
   display: flex;
   flex-direction: column;
   text-align: left;
   max-width: 30rem;
   justify-content: center;
-}
-
-.form {
-  border: solid 1px blue;
 }
 
 .tr-task,
@@ -215,7 +209,7 @@ table, .list-col {
 .th-title input.input {
   height: 3rem;
   max-width: 18rem;
-  padding: 0 1rem 0 0;
+  padding: 0 1rem 0 1rem;
   margin: 0;
 }
 
@@ -231,6 +225,7 @@ table, .list-col {
   justify-content: center;
   width: 4rem;
 }
+
 .btn-orange,
 .btn-red {
   color: white;
@@ -255,6 +250,7 @@ table, .list-col {
   color: orangered;
   background-color: #b2b2b2;
 }
+
 .td-newTask .inputField{
   max-width: 16rem;
   outline: none;

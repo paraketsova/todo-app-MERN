@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const todoItem = require('../models/todoModel')
-const {NativeDate} = require('mongoose');
 
 router.get('/favicon.ico', async function (req, res) {
   res.send();
@@ -73,13 +72,12 @@ router.put('/tasks/update/:id', async function (req, res, next) {
   const { tasks } = await todoItem.findOne({ _id: id });
   tasks[i].text = newTaskText;
 
-  const updateTaskTextList = await todoItem.findOneAndUpdate(
+  const updatedTodotList = await todoItem.findOneAndUpdate(
     { _id: id },
     { tasks },
     { new: true }
   );
-  res.json(updateTaskTextList);
-  console.log(updateTaskTextList);//TODO - add to client or delete
+  res.json(updatedTodotList);
 });
 
 /*  UPDATE task status  */
@@ -87,29 +85,25 @@ router.put('/tasks/complete/:id', async function (req, res, next) {
   const id = req.params.id;
   const i = req.body.i;
   const newStatus = req.body.newStatus;
-  console.log (id, i, newStatus);
 
   const { tasks } = await todoItem.findOne({ _id: id });
   tasks[i].completed = newStatus;
 
-  const updateTaskStatus = await todoItem.findOneAndUpdate(
+  const updatedTodotList = await todoItem.findOneAndUpdate(
     { _id: id },
     { tasks },
     { new: true }
   );
-  res.json(updateTaskStatus);
-  console.log(updateTaskStatus);//TODO - add to client or delete
+  res.json(updatedTodotList);
 });
 
 /*  DELETE list  */
 router.delete('/lists/delete/:id', async function (req, res, next) {
   const id = req.params.id;
-  console.log(id);
   const deletedList = await todoItem.findOneAndDelete(
     { _id: id }
   );
   res.json(deletedList);
-  console.log(deletedList);//TODO - add to client or delete
 });
 
 /*  DELETE task  */
@@ -118,13 +112,12 @@ router.delete('/tasks/delete/:id/', async function (req, res, next) {
   const index = req.body.i;
   const { tasks } = await todoItem.findOne({ _id: id });
   const newTasks = tasks.splice(index, 1);
-  const updateTasksList = await todoItem.findOneAndUpdate(
+  const updateTodoList = await todoItem.findOneAndUpdate(
     { _id: id },
     { tasks },
     { new: true }
   );
-  res.json(updateTasksList);
-  console.log(updateTasksList);//TODO - add to client or delete
+  res.json(updateTodoList);
 });
 
 module.exports = router;
