@@ -11,7 +11,7 @@ export default function AllTodoListsPage() {
 
   const fetchData = async () => {
     setLoading(true);
-    const url = 'http://localhost:3000/api/';
+    const url = '/api/';
     const res = await fetch(url);
     const data = await res.json();
 
@@ -32,7 +32,7 @@ export default function AllTodoListsPage() {
   const onChangeStatus = (_id, i) => async (event) => {
     event.preventDefault();
     setLoading(true);
-    const url = `http://localhost:3000/api/tasks/complete/${_id}`;
+    const url = `/api/tasks/complete/${_id}`;
     const todoList = data.find((item) => item._id === _id);
     const newStatus = !todoList.tasks[i].completed;
     todoList.tasks[i].completed = newStatus;
@@ -59,7 +59,7 @@ export default function AllTodoListsPage() {
 
     setLoading(true);
 
-    const url = `http://localhost:3000/api/tasks/add/${_id}`;
+    const url = `/api/tasks/add/${_id}`;
     const newText = newTaskTexts[_id];
     const response = await fetch(url, {
       method: 'POST',
@@ -93,7 +93,7 @@ export default function AllTodoListsPage() {
   async function handleOnSubmitNewTitle(event) {
     event.preventDefault();
 
-    const url = `http://localhost:3000/api/lists/add`;
+    const url = `/api/lists/add`;
     const response = await fetch(url, {
       method: 'POST',
       headers: { "Content-Type": "application/json" },

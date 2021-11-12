@@ -13,7 +13,7 @@ export default function ListDetailsPage(props) {
   useEffect(() => {
     const fetchList = async () => {
       setLoading(true);
-      const url = `http://localhost:3000/api/${todoId}`;
+      const url = `/api/${todoId}`;
       const res = await fetch(url);
       const item = await res.json();
       setTitle(item.title);
@@ -34,7 +34,7 @@ export default function ListDetailsPage(props) {
     async function handleOnSubmitTitle(event) {
       event.preventDefault();
       setLoading(true);
-      const url = `http://localhost:3000/api/lists/update/${todoId}`;
+      const url = `/api/lists/update/${todoId}`;
       await fetch(url, {
         method: 'PUT',
         headers: { "Content-Type": "application/json" },
@@ -53,7 +53,7 @@ export default function ListDetailsPage(props) {
     const handleOnSubmitTask = (i) => async (event) => {
       event.preventDefault();
       setLoading(true);
-      const url = `http://localhost:3000/api/tasks/update/${todoId}`;
+      const url = `/api/tasks/update/${todoId}`;
       const newTaskText = tasks[i].text;
       const response =  await fetch(url, {
         method: 'PUT',
@@ -70,7 +70,7 @@ export default function ListDetailsPage(props) {
     async function handleDeleteList(event) {
       event.preventDefault();
       setLoading(true);
-      const url = `http://localhost:3000/api/lists/delete/${todoId}`;
+      const url = `/api/lists/delete/${todoId}`;
       await fetch(url, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },
@@ -83,7 +83,7 @@ export default function ListDetailsPage(props) {
       event.preventDefault();
 
       setLoading(true);
-      const url = `http://localhost:3000/api/tasks/delete/${todoId}`;
+      const url = `/api/tasks/delete/${todoId}`;
       await fetch(url, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },
