@@ -1,11 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
-const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27027/todo-db');
+mongoose.connect(process.env.MONGO_CONNECTION_URL);
 
 const todoRouter = require('./routes/index');
 
