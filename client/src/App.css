@@ -16,6 +16,16 @@ h1 {
   font-weight: bolder;
 }
 
+.h1-title {
+  text-decoration: none;
+  color: orangered;
+  cursor: pointer;
+}
+
+.h1-title:hover {
+  color: orange;
+}
+
 .load {
   text-align: center;
 }

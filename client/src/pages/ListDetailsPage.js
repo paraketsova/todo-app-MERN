@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import { useHistory } from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 export default function ListDetailsPage(props) {
   const history = useHistory();
@@ -97,7 +97,9 @@ export default function ListDetailsPage(props) {
     return (
       <>
         <header>
-          <h1>Your TODOlist</h1>
+          <h1>
+            <Link className="h1-title" to={`/`}>Your TODOlists</Link>
+          </h1>
         </header>
         {loading && (
           <p className="load">Loading...</p>

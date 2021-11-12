@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-//import List from '../components/List';
 import {Link} from 'react-router-dom';
 
 export default function AllTodoListsPage() {
