@@ -49,7 +49,7 @@ export default function AllTodoListsPage() {
     console.log(newTaskTexts);
   };
 
-  const handleOnSubmitNewTask  = (_id) => async (event) => {
+  const handleOnSubmitNewTask = (_id) => async (event) => {
     event.preventDefault();
     console.log(newTaskTexts);
     const newText = newTaskTexts[_id].[_id];
@@ -69,6 +69,11 @@ export default function AllTodoListsPage() {
       newData[index] = newList;
       return newData;
     });
+    setNewTaskTexts(newTaskTexts => {
+      const newText = { ...newTaskTexts };
+      newText[_id] = {[_id]:  "Add new text"};
+      return newText;
+    });
   };
 
   /*  ADD new LIST  */
@@ -81,7 +86,7 @@ export default function AllTodoListsPage() {
   async function handleOnSubmitNewTitle(event) {
     event.preventDefault();
     console.log(newTitle);
-    // setLoading(true);
+
     const url = `http://localhost:3000/api/lists/add`;
     const response = await fetch(url, {
       method: 'POST',
@@ -96,8 +101,7 @@ export default function AllTodoListsPage() {
       console.log(newData);
       return newData;
     });
-    setNewTitle("")
-    // setLoading(false);
+    setNewTitle("");
   }
 
   /*  RENDERING  */
@@ -178,7 +182,7 @@ export default function AllTodoListsPage() {
                             name="newTask"
                             size={50}
                             placeholder="Add new task"
-                            value={newTaskTexts._id}
+                            value={newTaskTexts[todoList.id]}
                             onChange={handleOnChangeNewTask(todoList._id)}
                             className="inputField"
                           />

@@ -7,6 +7,7 @@
 body {
   padding: 0.25rem;
   font-family: 'Cabin Sketch', sans-serif;
+  text-align: center;
 }
 
 h1 {
@@ -157,13 +158,24 @@ table, .list-col {
 }
 
 .wrapper {
-  display: flex;
-  flex-direction: column;
   text-align: center;
+  border: solid 1px green;
+  justify-content: center;
+  max-width: 30rem;
+  margin-left: 35%;
 }
 
 .list-container {
-  text-align: inherit;
+  border: solid 1px red;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  max-width: 30rem;
+  justify-content: center;
+}
+
+.form {
+  border: solid 1px blue;
 }
 
 .tr-task,
@@ -172,10 +184,14 @@ table, .list-col {
   display: inline-flex;
 }
 
+.tr-title {
+  /*margin-left: 4rem;*/
+}
+
 .td-task,
 .th-title {
   padding: 0 0;
-  width: 20rem;
+  max-width: 20rem;
   align-items: center;
   border-bottom: solid 1px darkred;
   border-left: solid 1px darkred;
@@ -184,9 +200,6 @@ table, .list-col {
 
 .th-title {
   border-top: solid 1px darkred;
-}
-
-.th-title {
   background-color: darkorange;
   text-transform: uppercase;
   font-size: larger;
@@ -201,7 +214,7 @@ table, .list-col {
 .td-task input.input,
 .th-title input.input {
   height: 3rem;
-  width: 18rem;
+  max-width: 18rem;
   padding: 0 1rem 0 0;
   margin: 0;
 }
@@ -218,8 +231,8 @@ table, .list-col {
   justify-content: center;
   width: 4rem;
 }
-.btn-orange {
-  background-color: darkorange;
+.btn-orange,
+.btn-red {
   color: white;
   font-size: 0.9rem;
   padding: 0.5rem 0.8rem;
@@ -229,12 +242,21 @@ table, .list-col {
   transition: all .2s ease-in-out;
   font-family: inherit;
 }
+
+.btn-orange {
+  background-color: darkorange;
+}
+
+.btn-red {
+  background-color: #c50202;
+}
+
 .td-newTask {
   color: orangered;
   background-color: #b2b2b2;
 }
 .td-newTask .inputField{
-  width: 16rem;
+  max-width: 16rem;
   outline: none;
   border: none;
   cursor: text;
@@ -267,7 +289,6 @@ table, .list-col {
   font-size: larger;
   font-weight: bolder;
 }
-
 
 .th-newTitle input.input {
   height: 3rem;

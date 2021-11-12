@@ -80,7 +80,7 @@ router.put('/tasks/update/:id', async function (req, res, next) {
     { new: true }
   );
   res.json(updateTaskTextList);
-  console.log(updateTaskTextList);
+  console.log(updateTaskTextList);//TODO - add to client or delete
 });
 
 /*  UPDATE task status  */
@@ -99,15 +99,38 @@ router.put('/tasks/complete/:id', async function (req, res, next) {
     { new: true }
   );
   res.json(updateTaskStatus);
-  console.log(updateTaskStatus);
+  console.log(updateTaskStatus);//TODO - add to client or delete
 });
 
 /*  DELETE list  */
-router.delete('/lists/:id', function(req, res, next) {
+router.delete('/lists/delete/:id', async function (req, res, next) {
+  const id = req.params.id;
+  console.log(id);
+  const deletedList = await todoItem.findOneAndDelete(
+    { _id: id }
+  );
+  res.json(deletedList);
+  console.log(deletedList);//TODO - add to client or delete
 });
 
 /*  DELETE task  */
-router.delete('/tasks/:id/:index', function(req, res, next) {
+router.delete('/tasks/delete/:id/', async function (req, res, next) {
+  const id = req.params.id;
+  console.log(id);
+  const index = req.body.i;
+  console.log(index);
+  const { tasks } = await todoItem.findOne({ _id: id });
+  console.log("TASKS: " + tasks);
+  const newTasks = tasks.splice(index, 1);
+  console.log("NEWTASKS: " + tasks);
+
+  const updateTasksList = await todoItem.findOneAndUpdate(
+    { _id: id },
+    { tasks },
+    { new: true }
+  );
+  res.json(updateTasksList);
+  console.log(updateTasksList);//TODO - add to client or delete
 });
 
 module.exports = router;

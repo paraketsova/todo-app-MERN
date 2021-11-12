@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
+import { useHistory } from "react-router-dom";
 
 export default function ListDetailsPage(props) {
+  const history = useHistory();
   const [title, setTitle] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [lastModifiedAt, setLastModifiedAt] = useState(null);
@@ -23,18 +25,11 @@ export default function ListDetailsPage(props) {
     fetchList().then();
   }, [todoId])
 
-  /* UPDATE edited data on submit */
+  /*  UPDATE edited data on submit  */
 
     const handleOnChangeTitle = (event) => {
       event.preventDefault();
       setTitle(event.target.value);
-    };
-
-    const handleOnChangeTask = (i) => (event) => {
-      event.preventDefault();
-      const newTasks = [...tasks];
-      newTasks[i].text = event.target.value;
-      setTasks(newTasks);
     };
 
     async function handleOnSubmitTitle(event) {
@@ -48,6 +43,13 @@ export default function ListDetailsPage(props) {
       });
       setLoading(false);
     }
+
+    const handleOnChangeTask = (i) => (event) => {
+      event.preventDefault();
+      const newTasks = [...tasks];
+      newTasks[i].text = event.target.value;
+      setTasks(newTasks);
+    };
 
     const handleOnSubmitTask = (i) => async (event) => {
       event.preventDefault();
@@ -66,6 +68,39 @@ export default function ListDetailsPage(props) {
       setLastModifiedAt(updateTaskTextList.updatedAt);
     };
 
+    /*  DELETE a list on submit  */
+    async function handleDeleteList(event) {
+      event.preventDefault();
+      setLoading(true);
+      const url = `http://localhost:3000/api/lists/delete/${todoId}`;
+      await fetch(url, {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json" },
+      }).
+      then(() => history.push("/"));
+      setLoading(false);
+      // ADD a transition to the main page
+    }
+
+    /*  DELETE one TASK on submit  */
+    const handleDeleteTask = (i) => async (event) => {
+      event.preventDefault();
+      console.log(i);
+      console.log(tasks[i]);
+
+      console.log ("newTasks: " + tasks);
+      setLoading(true);
+      const url = `http://localhost:3000/api/tasks/delete/${todoId}`;
+      await fetch(url, {
+        method: 'DELETE',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ i })
+      });
+      const deletedTasks =  tasks.splice(i, 1);
+      setTasks(tasks);
+      setLoading(false);
+    }
+
     return (
       <>
         <header>
@@ -77,7 +112,7 @@ export default function ListDetailsPage(props) {
         {title && (
           <div className="wrapper">
             <div className="list-container">
-              <form className="form-title" onSubmit={handleOnSubmitTitle}>
+              <form className="form" onSubmit={handleOnSubmitTitle}>
                 <div className="tr-title">
                   <div className="th-title">
                     <input
@@ -98,8 +133,16 @@ export default function ListDetailsPage(props) {
                         edit
                     </button>
                   </div>
+                  <div className="btn-clmn">
+                    <button
+                      onClick={handleDeleteList}
+                      className="btn-red">
+                      delete
+                    </button>
+                  </div>
                 </div>
               </form>
+
 
               {tasks && tasks.map((task, i) => (
                 <form key={"submit" + i} onSubmit={handleOnSubmitTask(i)}>
@@ -121,6 +164,13 @@ export default function ListDetailsPage(props) {
                         onClick={handleOnSubmitTask[i]}
                         className="btn-orange">
                           edit
+                      </button>
+                    </div>
+                    <div className="btn-clmn">
+                      <button
+                        onClick={handleDeleteTask(i)}
+                        className="btn-red">
+                        delete
                       </button>
                     </div>
                   </div>
