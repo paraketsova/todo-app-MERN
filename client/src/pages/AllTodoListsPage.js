@@ -40,52 +40,51 @@ export default function AllTodoListsPage() {
   /*  ADD new TASK  */
   const handleOnChangeNewTask = (_id) => (event) => {
     event.preventDefault();
-    console.log(_id);
     setNewTaskTexts(newTaskTexts => {
-      const newText = { ...newTaskTexts };
-      newText[_id] = {[_id]:  event.target.value};
-      return newText;
+      const newTexts = { ...newTaskTexts };
+      newTexts[_id] = event.target.value;
+      return newTexts;
     });
-    console.log(newTaskTexts);
   };
 
   const handleOnSubmitNewTask = (_id) => async (event) => {
     event.preventDefault();
-    console.log(newTaskTexts);
-    const newText = newTaskTexts[_id].[_id];
-    console.log(newText);
+
     setLoading(true);
+
     const url = `http://localhost:3000/api/tasks/add/${_id}`;
+    const newText = newTaskTexts[_id];
     const response = await fetch(url, {
-        method: 'POST',
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ newText, _id })
-      });
+      method: 'POST',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ newText })
+    });
     const newList = await response.json();
+
     setLoading(false);
+
     setData(data => {
-      const newData = [ ...data];
-      const index = newData.findIndex(list => list._id === _id);
-      newData[index] = newList;
+      const newData = [...data];
+      const listIndex = newData.findIndex(list => list._id === _id);
+      newData[listIndex] = newList;
       return newData;
     });
+
     setNewTaskTexts(newTaskTexts => {
-      const newText = { ...newTaskTexts };
-      newText[_id] = {[_id]:  "Add new text"};
-      return newText;
+      const updatedNewTaskTexts = { ...newTaskTexts };
+      updatedNewTaskTexts[_id] = '';
+      return updatedNewTaskTexts;
     });
   };
 
   /*  ADD new LIST  */
-  const  handleOnChangeNewTitle = (event) => {
+  const handleOnChangeNewTitle = (event) => {
     event.preventDefault();
     setNewTitle(event.target.value);
-    console.log(newTitle);
   };
 
   async function handleOnSubmitNewTitle(event) {
     event.preventDefault();
-    console.log(newTitle);
 
     const url = `http://localhost:3000/api/lists/add`;
     const response = await fetch(url, {
@@ -94,14 +93,14 @@ export default function AllTodoListsPage() {
       body: JSON.stringify({ newTitle })
     });
     const newList = await response.json();
-    console.log(newList);
+
     setData(data => {
-      const newData = [ ...data];
+      const newData = [...data];
       newData.push(newList);
-      console.log(newData);
       return newData;
     });
-    setNewTitle("");
+
+    setNewTitle('');
   }
 
   /*  RENDERING  */
@@ -124,28 +123,18 @@ export default function AllTodoListsPage() {
                     className="input"
                     type="text"
                     name="title"
-                    placeholder="Add new title"
+                    placeholder="Add new todo list"
                     value={newTitle}
                     size={50}
                     onChange={handleOnChangeNewTitle}
                   />
-                  <button
-                    type="submit"
-                    onClick={handleOnSubmitNewTitle}
-                    className="btn-newTitle">
-                    add
-                  </button>
+                  <button type="submit" className="btn-newTitle">add</button>
                 </div>
               </div>
             </form>
           </div>
 
           {data.map((todoList, i) => {
-            // {console.log(todoList)}
-            // {Object.entries(todoList).forEach((prop)=> console.log(prop))}
-            // {console.log(JSON.stringify(todoList, null, 4))}
-            // {console.log(todoList.tasks[0].task)}
-
             return (
               <div className="list" key={i}>
                 <table className="table-all-lists">
@@ -158,7 +147,7 @@ export default function AllTodoListsPage() {
                       </th>
                     </tr>
 
-                    { todoList.tasks && todoList.tasks.map((task, i) => (
+                    {todoList.tasks && todoList.tasks.map((task, i) => (
                       <tr key={todoList._id + i}>
                         <td>
                           <label className="checkbox">
@@ -167,14 +156,14 @@ export default function AllTodoListsPage() {
                               checked={task.completed}
                               onChange={onChangeStatus(todoList._id, i)}
                             />
-                            <span className="checkmark"></span>
+                            <span className="checkmark"/>
                             {task.text}
                           </label>
                         </td>
                       </tr>
                     ))}
 
-                    <tr key={"newTask" + todoList.id}>
+                    <tr>
                       <td className="td-newTask">
                         <form className="newTask" onSubmit={handleOnSubmitNewTask(todoList._id)}>
                           <input
@@ -182,16 +171,11 @@ export default function AllTodoListsPage() {
                             name="newTask"
                             size={50}
                             placeholder="Add new task"
-                            value={newTaskTexts[todoList.id]}
+                            value={newTaskTexts[todoList._id] ?? ""}
                             onChange={handleOnChangeNewTask(todoList._id)}
                             className="inputField"
                           />
-                          <button
-                            type="submit"
-                            onClick={handleOnSubmitNewTask}
-                            className="btn-orange">
-                              add
-                          </button>
+                          <button type="submit" className="btn-orange">add</button>
                         </form>
                       </td>
                     </tr>

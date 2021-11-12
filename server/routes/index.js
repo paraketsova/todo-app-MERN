@@ -43,13 +43,12 @@ router.post('/tasks/add/:id', async function (req, res, next) {
     text: newText,
     completed: false,
   });
- const todoListNewTask = await todoItem.findOneAndUpdate(
-   { _id: id },
-   { tasks },
-   { new: true }
- );
-  res.json(todoListNewTask);
-  console.log(todoListNewTask);
+  const newTodoList = await todoItem.findOneAndUpdate(
+    { _id: id },
+    { tasks },
+    { new: true }
+  );
+  res.json(newTodoList);
 });
 
 /*  UPDATE list title  */
@@ -116,14 +115,9 @@ router.delete('/lists/delete/:id', async function (req, res, next) {
 /*  DELETE task  */
 router.delete('/tasks/delete/:id/', async function (req, res, next) {
   const id = req.params.id;
-  console.log(id);
   const index = req.body.i;
-  console.log(index);
   const { tasks } = await todoItem.findOne({ _id: id });
-  console.log("TASKS: " + tasks);
   const newTasks = tasks.splice(index, 1);
-  console.log("NEWTASKS: " + tasks);
-
   const updateTasksList = await todoItem.findOneAndUpdate(
     { _id: id },
     { tasks },

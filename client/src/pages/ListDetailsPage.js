@@ -76,8 +76,8 @@ export default function ListDetailsPage(props) {
       await fetch(url, {
         method: 'DELETE',
         headers: { "Content-Type": "application/json" },
-      }).
-      then(() => history.push("/"));
+      })
+        .then(() => history.push("/"));
       setLoading(false);
       // ADD a transition to the main page
     }
